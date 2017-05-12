@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def new
+		@article = Article.new
 	end
 
 	def create
@@ -12,8 +13,10 @@ class ArticlesController < ApplicationController
 		#this is the actual code that will create article upon submission
 		@article = Article.new(article_params)
 
-		@article.save
-		redirect_to @article
+		if @article.save
+			redirect_to @article
+		else
+			render 'new'
 	end
 
 	def show
